@@ -7,7 +7,7 @@ export const getTranscript = async (videoId) => {
     console.log("✅ Transcript sample:", transcriptText.slice(0, 500));
     return transcriptText;
   } catch (error) {
-    console.warn("❌ Transcript not available or fetch failed:", error.message);
+    console.warn("Transcript not available or fetch failed:", error.message);
     return null;
   }
 };

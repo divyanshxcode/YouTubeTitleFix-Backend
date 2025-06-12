@@ -77,11 +77,21 @@ app.post("/api/video", async (req, res) => {
     // Generate title from transcript
     const aiTitle = await generateTitleFromPrompt(transcript);
 
+    if (
+      !aiTitle ||
+      aiTitle.includes("Error generating title") ||
+      aiTitle.includes("Unable to parse")
+    ) {
+      return res.status(500).json({
+        error: "Gemini Failed",
+      });
+    }
     // Save to DB
     const newVideo = new Video({
       youtubeId,
       AI_Title: aiTitle,
     });
+    AIzaSyAwNjYLouEgghxDTYyuYY7NjfGjTFCTNMo;
 
     await newVideo.save();
 
